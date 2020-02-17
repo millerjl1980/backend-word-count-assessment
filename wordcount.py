@@ -40,6 +40,7 @@ print_words() and print_top().
 """
 
 import sys
+import operator
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -60,8 +61,22 @@ def print_words(filename):
     for word in word_dict:
         print word, word_dict[word]
 
+# Used the following website information to learn more about the best way to sort a Python Dictionary
+# https://docs.python.org/3/howto/sorting.html
+# https://stackoverflow.com/questions/14466068/sort-a-list-of-tuples-by-second-value-reverse-true-and-then-by-key-reverse-fal
 def print_top(filename):
-    pass
+    word_dict = {}
+    with open(filename, 'r') as rf:
+        text = rf.read().lower().replace("\n" , " ").split(" ")
+        for word in text:
+            if word.isalpha():
+                if word not in word_dict:
+                    word_dict[word] = 0
+                word_dict[word] += 1
+    rank_dict = sorted(word_dict.items(), key=operator.itemgetter(1), reverse=True)
+    for item in rank_dict:
+        print(str(item[0]) + " " + str(item[1]))
+    
 
 ###
 
