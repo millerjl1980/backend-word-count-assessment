@@ -47,6 +47,22 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+def print_words(filename):
+    word_dict = {}
+    with open(filename, 'r') as rf:
+        text = rf.read().lower().replace("\n" , " ").split(" ")
+        for word in text:
+            if word.isalpha():
+                if word not in word_dict:
+                    word_dict[word] = 0
+                word_dict[word] += 1
+                
+    for word in word_dict:
+        print word, word_dict[word]
+
+def print_top(filename):
+    pass
+
 ###
 
 # This basic command line argument parsing code is provided and
